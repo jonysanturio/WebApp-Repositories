@@ -21,8 +21,8 @@
 flowchart LR
     M0[M0 — Scaffold e infra] --> M1[M1 — Autenticación]
     M1 --> M2[M2 — Catálogo comunitario]
-    M1 --> M3[M3 — Aportes y validación]
-    M2 --> M4[M4 — Roadmap personal]
+    M1 --> M3[M3 — Aportes y ]
+    M2 --> M4[M4 — Roadmap personvalidaciónal]
 ```
 
 > [Ajustá el grafo a tu PRD y tu TRD. Las flechas son dependencias reales:
@@ -68,9 +68,11 @@ flowchart LR
 
 | # | Tarea | Módulo | Estado | Rama / Commit |
 |---|-------|--------|--------|---------------|
-| 0.1 | Estructura de carpetas | M0 | [ ] | |
-| 0.2 | docker-compose postgres | M0 | [ ] | |
-| … | | | | |
+| 0.1 | Documentación e infraestructura inicial (T1) | M0 | [x] |
+| 0.2 | Backend mínimo Go + Gin (T2) | M0 | [x] |
+| 0.3 | Frontend mínimo React + Vite + TS (T3) | M0 | [x] | 
+| 0.4 | Docker Compose dev (Postgres, Go, React) (T4) | M0 | [x] | 
+| 0.5 | Release v0.1.0 y cierre del Scaffold (T5) | M0 | [x] | 
 
 ## 5. Estrategia de testing
 
