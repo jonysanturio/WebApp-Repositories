@@ -1,38 +1,39 @@
 package main
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
+	"github.com/gin-gonic/gin"
+
 )
 
-func main() {
-	mux := http.NewServeMux()
 
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			w.Header().Set("Allow", "GET")
-			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
-			return
-		}
+type curso struct {
+	ID		string	`json:"id"`
+	Nombre	string	`json:"nombre"`
+}
 
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{
-			"status": "ok",
-		})
+var cursos = []curso {
+	{ID: "1", Nombre: "Curso 1"},
+	{ID: "2", Nombre: "Curso 2"},
+	{ID: "3", Nombre: "Curso 3"},
+}
+
+func main(){
+	router := gin.Default()
+
+	router.GET("/health", getHealth)
+
+	router.GET("/curso", getCurso)
+
+	router.Run("localhost:8000")
+}
+
+func getHealth(c *gin.Context){
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
 	})
+}
 
-	mux.HandleFunc("/cursos", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			w.Header().Set("Allow", "GET")
-			http.Error(w, "Método no permitido", http.StatusMethodNotAllowed)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("[]"))
-	})
-
-	log.Println("Servidor disponible en http://localhost:8000")
-	log.Fatal(http.ListenAndServe(":8000", mux))
+func getCurso(c *gin.Context){
+	c.IndentedJSON(http.StatusOK, cursos)
 }
