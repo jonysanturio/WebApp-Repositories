@@ -5,7 +5,27 @@
 >
 > **Estado:** 📚 Documentación (Instancia A) — desarrollo pendiente de aprobación docente.
 
-**Stack:** React 19 + Vite + pnpm · FastAPI + uv · PostgreSQL 18.6 · Docker Compose (dev)
+**Stack:** React 19 + Vite + pnpm · Golang (Gin) · PostgreSQL 18.6 · Docker Compose (dev)
+
+---
+
+# Como ejecutar el proyecto...
+1. **Clonar el repositorio:**
+  git clone https://github.com/jonysanturio/WebApp-Repositories.git
+  cd WebApp-Repositories
+  **Tener en cuenta: descargar docker desktop, golang y postgres en cada maquina para correrlo en el mismo**
+
+
+2. **Copiar las variables de entorno**
+  cp .env.example .env
+
+3. **Levantar el servidor docker**
+  docker compose up --build
+
+4. **Acceso rapido**
+  frontend: http://localhost:5173
+  backend: http://localhost:8000/health
+  backend API Cursos: http://localhost:8000/cursos
 
 ---
 

@@ -25,7 +25,7 @@ func main(){
 
 	router.GET("/curso", getCurso)
 
-	router.Run("localhost:8000")
+	router.Run(":8000")
 }
 
 func getHealth(c *gin.Context){
