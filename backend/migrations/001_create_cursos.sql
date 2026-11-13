@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS cursos (
+    id BIGSERIAL PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    estado TEXT NOT NULL
+);
