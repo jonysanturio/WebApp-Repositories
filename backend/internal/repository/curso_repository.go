@@ -3,6 +3,7 @@ package repository
 import (
 	"backend/internal/domain"
 	"database/sql"
+	"errors"
 )
 
 type ListFilters struct {
@@ -37,11 +38,17 @@ func (r *postgresCursoRepository) Create(c domain.Curso) (string, error) {
 
 func (r *postgresCursoRepository) GetByID(id string) (*domain.Curso, error) {
 	query := `SELECT id, titulo, estado FROM cursos WHERE id = $1`
+
 	var c domain.Curso
 	err := r.db.QueryRow(query, id).Scan(&c.ID, &c.Titulo, &c.Estado)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, nil
+	}
 	if err != nil {
 		return nil, err
 	}
+
 	return &c, nil
 }
 
@@ -64,6 +71,12 @@ func (r *postgresCursoRepository) List(filters ListFilters) ([]domain.Curso, int
 			return nil, 0, err
 		}
 		cursos = append(cursos, c)
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, 0, nil
+		}
+		if err != nil {
+			return nil, 0, err
+		}
 	}
 
 	var total int
