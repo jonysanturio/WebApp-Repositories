@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"database/sql"
 	"backend/internal/domain"
+	"database/sql"
 )
 
 type ListFilters struct {
